@@ -1,0 +1,20 @@
+class Solution {
+    /**
+     * @param {number[]} temperatures
+     * @return {number[]}
+     */
+    dailyTemperatures(temperatures) {
+        const res = new Array(temperatures.length).fill(0);
+        const stack = [];
+        for(let i = 0; i < temperatures.length; i++){
+            while(stack.length > 0 && temperatures[i] > temperatures[stack[stack.length-1]]){
+                let prev = stack.pop();
+                res[prev] = i - prev;
+            }
+
+            stack.push(i);
+        }
+
+        return res;
+    }
+}
